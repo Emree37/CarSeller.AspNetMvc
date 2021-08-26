@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSeller.DataAccessLayer",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSeller.Entities", "CarSeller.Entities\CarSeller.Entities.csproj", "{21972C6C-6A87-4C82-858C-C7F5FFD36E88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSeller.Common", "CarSeller.Common\CarSeller.Common.csproj", "{FDE2E3EA-E798-4E73-A28A-2EFFA887D57D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSeller.Core", "CarSeller.Core\CarSeller.Core.csproj", "{461983BE-2195-4D91-A2BB-C2F89777980D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{21972C6C-6A87-4C82-858C-C7F5FFD36E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21972C6C-6A87-4C82-858C-C7F5FFD36E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21972C6C-6A87-4C82-858C-C7F5FFD36E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE2E3EA-E798-4E73-A28A-2EFFA887D57D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE2E3EA-E798-4E73-A28A-2EFFA887D57D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE2E3EA-E798-4E73-A28A-2EFFA887D57D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE2E3EA-E798-4E73-A28A-2EFFA887D57D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461983BE-2195-4D91-A2BB-C2F89777980D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461983BE-2195-4D91-A2BB-C2F89777980D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461983BE-2195-4D91-A2BB-C2F89777980D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461983BE-2195-4D91-A2BB-C2F89777980D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

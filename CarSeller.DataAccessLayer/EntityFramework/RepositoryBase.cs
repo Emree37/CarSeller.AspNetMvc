@@ -9,8 +9,8 @@ namespace CarSeller.DataAccessLayer.EntityFramework
 {
     public class RepositoryBase
     {
-        protected static DatabaseContext db;
-        private static object _lockSync = new object();
+        protected static DatabaseContext context;
+        protected static object _lockSync = new object();
 
         protected RepositoryBase()
         {
@@ -19,19 +19,17 @@ namespace CarSeller.DataAccessLayer.EntityFramework
 
         private static void CreateContext()
         {
-            if (db == null)
+            if (context == null)
             {
                 lock (_lockSync)
                 {
-                    if (db == null)
+                    if (context == null)
                     {
-                        db = new DatabaseContext();
+                        context = new DatabaseContext();
                     }
                 }
 
-
             }
-
         }
     }
 }

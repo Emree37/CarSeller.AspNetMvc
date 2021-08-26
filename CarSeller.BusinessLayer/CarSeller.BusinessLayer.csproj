@@ -48,10 +48,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstract\ManagerBase.cs" />
+    <Compile Include="CarManager.cs" />
+    <Compile Include="CarSellerUserManager.cs" />
+    <Compile Include="CategoryManager.cs" />
+    <Compile Include="CommentManager.cs" />
+    <Compile Include="LikeManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="Results\BusinessLayerResult.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CarSeller.Common\CarSeller.Common.csproj">
+      <Project>{fde2e3ea-e798-4e73-a28a-2effa887d57d}</Project>
+      <Name>CarSeller.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CarSeller.Core\CarSeller.Core.csproj">
+      <Project>{461983BE-2195-4D91-A2BB-C2F89777980D}</Project>
+      <Name>CarSeller.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CarSeller.DataAccessLayer\CarSeller.DataAccessLayer.csproj">
       <Project>{6ff617c1-0b8c-462f-8fb3-f970323b2c88}</Project>
       <Name>CarSeller.DataAccessLayer</Name>
@@ -65,5 +79,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
