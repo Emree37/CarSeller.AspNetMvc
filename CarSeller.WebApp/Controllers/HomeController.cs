@@ -2,6 +2,8 @@
 using CarSeller.BusinessLayer.Results;
 using CarSeller.Entities;
 using CarSeller.Entities.ValueObjects;
+using CarSeller.WebApp.Models;
+using CarSeller.WebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,21 +23,6 @@ namespace CarSeller.WebApp.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            //object o = 0;
-            //int a = 1;
-            //int c = a / (int)o;
-
-            //throw new Exception("Herhangi bir hata oluştu.");
-
-
-
-            // CategoyController üzerinden gelen view talebi ve model..
-            //
-            //if (TempData["mm"] != null)
-            //{
-            //    return View(TempData["mm"] as List<Note>);
-            //}
-
 
             return View(carManager.ListQueryable().Where(x => x.IsDraft == false).OrderByDescending(x => x.ModifiedOn).ToList());
             //return View(nm.GetAllNoteQueryable().OrderByDescending(x => x.ModifiedOn).ToList());
@@ -47,17 +34,6 @@ namespace CarSeller.WebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            //Category cat = categoryManager.Find(x => x.Id == id.Value);
-
-            //if (cat == null)
-            //{
-            //    return HttpNotFound();
-            //    //return RedirectToAction("Index", "Home");
-            //}
-
-            //List<Note> notes = cat.Notes.Where(
-            //    x => x.IsDraft == false).OrderByDescending(x => x.ModifiedOn).ToList()
 
             List<Car> cars = carManager.ListQueryable().Where(
                 x => x.IsDraft == false && x.CategoryId == id).OrderByDescending(
@@ -196,14 +172,6 @@ namespace CarSeller.WebApp.Controllers
 
                 if (res.Errors.Count > 0)
                 {
-                    // Hata koduna göre özel işlem yapmamız gerekirse..
-                    // Hatta hata mesajına burada müdahale edilebilir.
-                    // (Login.cshtml'deki kısmında açıklama satırı şeklinden kurtarınız)
-                    //
-                    //if (res.Errors.Find(x => x.Code == ErrorMessageCode.UserIsNotActive) != null)
-                    //{
-                    //    ViewBag.SetLink = "http://Home/Activate/1234-4567-78980";
-                    //}
 
                     res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
 
@@ -236,42 +204,7 @@ namespace CarSeller.WebApp.Controllers
                 }
 
 
-                //EvernoteUser user = null;
-
-                //try
-                //{
-                //    user = eum.RegisterUser(model);
-                //}
-                //catch (Exception ex)
-                //{
-                //    ModelState.AddModelError("", ex.Message);   
-                //}
-
-
-
-                //if (model.Username == "aaa")
-                //{
-                //    ModelState.AddModelError("", "Kullanıcı adı kullanılıyor.");
-                //}
-
-                //if(model.EMail == "aaa@aa.com")
-                //{
-                //    ModelState.AddModelError("", "E-posta adresi kullanılıyor.");
-                //}
-
-                //foreach (var item in ModelState)
-                //{
-                //    if(item.Value.Errors.Count > 0)
-                //    {
-                //        return View(model);
-                //    }
-                //}
-
-                //if (user == null)
-                //{
-                //    return View(model);
-                //}
-
+                
                 OkViewModel notifyObj = new OkViewModel()
                 {
                     Title = "Kayıt Başarılı",

@@ -1,6 +1,6 @@
 ﻿using CarSeller.BusinessLayer;
+using CarSeller.BusinessLayer.Results;
 using CarSeller.Entities;
-using CarSeller.WebApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +10,16 @@ using System.Web.Mvc;
 
 namespace CarSeller.WebApp.Controllers
 {
-    public class CategoryController : Controller
+    public class CarSellerUserController : Controller
     {
-        private CategoryManager categoryManager = new CategoryManager();
+
+        private CarSellerUserManager carSellerUserManager = new CarSellerUserManager();
 
 
         public ActionResult Index()
         {
-            return View(categoryManager.List());
+            return View(carSellerUserManager.List());
         }
-
 
         public ActionResult Details(int? id)
         {
@@ -28,16 +28,15 @@ namespace CarSeller.WebApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Category category = categoryManager.Find(x => x.Id == id.Value);
+            CarSellerUser carSellerUser = carSellerUserManager.Find(x => x.Id == id.Value);
 
-            if (category == null)
+            if (carSellerUser == null)
             {
                 return HttpNotFound();
             }
 
-            return View(category);
+            return View(carSellerUser);
         }
-
 
         public ActionResult Create()
         {
@@ -47,7 +46,7 @@ namespace CarSeller.WebApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Category category)
+        public ActionResult Create(CarSellerUser carSellerUser)
         {
             ModelState.Remove("CreatedOn");
             ModelState.Remove("ModifiedOn");
@@ -55,15 +54,19 @@ namespace CarSeller.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                categoryManager.Insert(category);
-                CacheHelper.RemoveCategoriesFromCache();
+                BusinessLayerResult<CarSellerUser> res = carSellerUserManager.Insert(carSellerUser);
+
+                if (res.Errors.Count > 0)
+                {
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
+                    return View(carSellerUser);
+                }
 
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(carSellerUser);
         }
-
 
         public ActionResult Edit(int? id)
         {
@@ -72,19 +75,20 @@ namespace CarSeller.WebApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Category category = categoryManager.Find(x => x.Id == id.Value);
+            CarSellerUser carSellerUser = carSellerUserManager.Find(x => x.Id == id.Value);
 
-            if (category == null)
+            if (carSellerUser == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+
+            return View(carSellerUser);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Category category)
+        public ActionResult Edit(CarSellerUser carSellerUser)
         {
             ModelState.Remove("CreatedOn");
             ModelState.Remove("ModifiedOn");
@@ -92,16 +96,17 @@ namespace CarSeller.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                Category cat = categoryManager.Find(x => x.Id == category.Id);
-                cat.Title = category.Title;
-                cat.Description = category.Description;
+                BusinessLayerResult<CarSellerUser> res = carSellerUserManager.Update(carSellerUser);
 
-                categoryManager.Update(cat);
-                CacheHelper.RemoveCategoriesFromCache();
+                if (res.Errors.Count > 0)
+                {
+                    res.Errors.ForEach(x => ModelState.AddModelError("", x.Message));
+                    return View(carSellerUser);
+                }
 
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(carSellerUser);
         }
 
 
@@ -112,26 +117,22 @@ namespace CarSeller.WebApp.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Category category = categoryManager.Find(x => x.Id == id.Value);
+            CarSellerUser carSellerUser = carSellerUserManager.Find(x => x.Id == id.Value);
 
-            if (category == null)
+            if (carSellerUser == null)
             {
                 return HttpNotFound();
             }
 
-            return View(category);
+            return View(carSellerUser);
         }
-
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = categoryManager.Find(x => x.Id == id);
-            categoryManager.Delete(category);
-
-            CacheHelper.RemoveCategoriesFromCache();
-
+            CarSellerUser carSellerUser = carSellerUserManager.Find(x => x.Id == id);
+            carSellerUserManager.Delete(carSellerUser);
 
             return RedirectToAction("Index");
         }

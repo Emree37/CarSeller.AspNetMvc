@@ -1,9 +1,8 @@
-﻿@using CarSeller.BusinessLayer
+﻿@using CarSeller.WebApp.Models
 @using CarSeller.Entities
 
 @{
-    CategoryManager cm = new CategoryManager();
-    List<Category> list = cm.GetCategories();
+    List<Category> list = CacheHelper.GetCategoriesFromCache();
 }
 
 <p class="lead">Kategoriler</p>

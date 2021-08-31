@@ -99,3 +99,13 @@
     </div>
 </div>
 
+@section footer{
+    @Html.Partial("_PartialFooter")
+}
+
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Yorumlar")
+@Bootstrap.ModalPopup(id: "modal_cardetail", title: "Araba Detayı")
+
+<script src="~/Scripts/comment.js"></script>
+<script src="~/Scripts/like.js"></script>
+<script src="~/Scripts/CarDetailPopup.js"></script>
